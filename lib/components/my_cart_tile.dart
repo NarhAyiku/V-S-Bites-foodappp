@@ -62,6 +62,7 @@ class MyCartTile extends StatelessWidget {
 
                       const SizedBox(height: 10),
 
+<<<<<<< HEAD
                       // Quantity Controls
                       QuantitySelector(
                         quantity: cartItem.quantity,
@@ -74,6 +75,21 @@ class MyCartTile extends StatelessWidget {
                               cartItem.food, cartItem.selectedAddons);
                         },
                       ),
+=======
+
+                      // Quantity Controls
+                  QuantitySelector(
+                    quantity: cartItem.quantity,
+                    food: cartItem.food,
+                    onDecrement: () {
+                      restaurants.removeFromCart(cartItem);
+                    },
+                    onIncrement: () {
+                      restaurants.addToCart(
+                          cartItem.food, cartItem.selectedAddons);
+                    },
+                  ),
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
                     ],
                   ),
                 ],

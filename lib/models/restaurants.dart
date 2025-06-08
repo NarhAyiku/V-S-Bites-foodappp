@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:foodappp/models/cart_item.dart';
 import 'package:intl/intl.dart';
 import 'food.dart';
+<<<<<<< HEAD
 
 class Restaurants extends ChangeNotifier {
+=======
+class Restaurants extends ChangeNotifier{
+
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
   // list of food menu
   final List<Food> _menu = [
     // Local
@@ -130,8 +135,12 @@ class Restaurants extends ChangeNotifier {
     ),
     Food(
       name: "Greek Salad",
+<<<<<<< HEAD
       description:
           "A refreshing mix of cucumbers, tomatoes, feta cheese, and olives.",
+=======
+      description: "A refreshing mix of cucumbers, tomatoes, feta cheese, and olives.",
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
       imagePath: "assets/images/Salads/salad4.png",
       price: '120',
       category: FoodCategory.Salads,
@@ -139,8 +148,12 @@ class Restaurants extends ChangeNotifier {
     ),
     Food(
       name: "Caesar Salad",
+<<<<<<< HEAD
       description:
           "Crisp romaine lettuce tossed with parmesan, croutons, and Caesar dressing.",
+=======
+      description: "Crisp romaine lettuce tossed with parmesan, croutons, and Caesar dressing.",
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
       imagePath: "assets/images/Salads/salad4.png",
       price: '130',
       category: FoodCategory.Salads,
@@ -240,6 +253,11 @@ class Restaurants extends ChangeNotifier {
     ),
   ];
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
 // user cart
   final List<CartItem> _cart = [];
 
@@ -253,8 +271,11 @@ class Restaurants extends ChangeNotifier {
   List<Food> get menu => _menu;
   List<CartItem> get cart => _cart;
   String get deliveryAddress => _deliveryAddress;
+<<<<<<< HEAD
 
   get successfulOrders => null;
+=======
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
   /*
 
           O P E R A T I O N S
@@ -263,15 +284,28 @@ class Restaurants extends ChangeNotifier {
   // add to cart
   void addToCart(Food food, List<Addon> selectedAddons) {
     // see if there is a cart item already with the same food and selected addons
+<<<<<<< HEAD
     CartItem? cartItem = _cart.firstWhereOrNull((item) {
+=======
+    CartItem? cartItem =_cart.firstWhereOrNull((item) {
+
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
       //check if food is the item are the same
       bool isSameFood = item.food.name == food.name;
 
       // check and if the list of selected addons are the same
+<<<<<<< HEAD
       bool isSameAddons =
           const ListEquality().equals(item.selectedAddons, selectedAddons);
 
       return isSameFood && isSameAddons;
+=======
+      bool isSameAddons = const ListEquality().equals(item.selectedAddons, selectedAddons);
+
+
+      return isSameFood && isSameAddons;
+
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
     });
     // if the cart item already exists, increase the quantity
     if (cartItem != null) {
@@ -279,8 +313,14 @@ class Restaurants extends ChangeNotifier {
     }
     // otherwise, add a new cart item to the cart
     else {
+<<<<<<< HEAD
       _cart.add(
         CartItem(food: food, selectedAddons: selectedAddons),
+=======
+      _cart.add(CartItem(food: food,
+          selectedAddons: selectedAddons
+      ),
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
       );
     }
     notifyListeners();
@@ -290,10 +330,17 @@ class Restaurants extends ChangeNotifier {
   void removeFromCart(CartItem cartItem) {
     int cartIdex = _cart.indexOf(cartItem);
 
+<<<<<<< HEAD
     if (cartIdex != 1) {
       if (_cart[cartIdex].quantity >= 1) {
         _cart[cartIdex].quantity--;
       } else {
+=======
+    if (cartIdex != -1) {
+      if (_cart[cartIdex].quantity > 1){
+        _cart[cartIdex].quantity --;
+      }else{
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
         _cart.removeAt(cartIdex);
       }
     }
@@ -302,6 +349,7 @@ class Restaurants extends ChangeNotifier {
   }
 
   // get total price of cart
+<<<<<<< HEAD
   double getTotalPrice() {
     double total = 0.0;
 
@@ -322,12 +370,40 @@ class Restaurants extends ChangeNotifier {
     return total;
   }
 
+=======
+double getTotalPrice() {
+  double total = 0.0;
+
+  for (CartItem cartItem in _cart) {
+    // Parse the price string into a double, with a fallback to 0.0 if it's invalid
+    double itemPrice = double.tryParse(cartItem.food.price) ?? 0.0; 
+
+    // Calculate the total for this cart item, including add-ons
+    double itemTotal = itemPrice;
+
+    for (Addon addon in cartItem.selectedAddons) {
+      itemTotal += addon.price;
+    }
+
+    total += itemTotal * cartItem.quantity;
+  }
+
+  return total;
+}
+
+
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
   // get total number of items in cart
   int getTotalItemCount() {
     int getTotalItemCount = 0;
 
+<<<<<<< HEAD
     for (CartItem cartItem in _cart) {
       getTotalItemCount += cartItem.quantity;
+=======
+    for(CartItem cartItem in _cart) {
+      getTotalItemCount +=  cartItem.quantity;
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
     }
 
     return getTotalItemCount;
@@ -339,12 +415,17 @@ class Restaurants extends ChangeNotifier {
     notifyListeners();
   }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
   // update delivery address
   void updateDeliveryAddress(String newAddress) {
     _deliveryAddress = newAddress;
     notifyListeners();
   }
 
+<<<<<<< HEAD
   /*
           H E L P E R S
            */
@@ -367,6 +448,27 @@ class Restaurants extends ChangeNotifier {
       // Changed variable name to avoid conflict
       receipt.writeln(
           "₵${cartItem.quantity} x ₵${cartItem.food.name} - ₵${_formatPrice(double.parse(cartItem.food.price))}");
+=======
+          /*
+          H E L P E R S
+           */
+
+          // generate receipt
+String displayCartReceipt(dynamic cartItem) {
+  final receipt = StringBuffer();
+  receipt.writeln("Here you GO!! Your receipt.");
+  receipt.writeln();
+
+  // format the date to include up to seconds only
+  String formattedDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+
+  receipt.writeln(formattedDate);
+  receipt.writeln();
+  receipt.writeln("-----------");
+
+    for (final cartItem in _cart) {  // Changed variable name to avoid conflict
+    receipt.writeln("₵${cartItem.quantity} x ₵${cartItem.food.name} - ₵${_formatPrice(double.parse(cartItem.food.price))}");
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
       SizedBox(height: 5);
       if (cartItem.selectedAddons.isNotEmpty) {
         receipt.writeln("  Add-ons:₵${_formatAddons(cartItem.selectedAddons)}");
@@ -374,6 +476,7 @@ class Restaurants extends ChangeNotifier {
       receipt.writeln();
     }
 
+<<<<<<< HEAD
     receipt.writeln("-----------");
     receipt.writeln();
     receipt.writeln("Total Item : ${getTotalItemCount()}");
@@ -394,10 +497,39 @@ class Restaurants extends ChangeNotifier {
         .map((addon) => "${addon.name} (₵${_formatPrice(addon.price)})")
         .join(", ");
   }
+=======
+  receipt.writeln("-----------");
+  receipt.writeln();
+  receipt.writeln("Total Item : ${getTotalItemCount()}");
+  receipt.writeln("Total Price : ₵${_formatPrice(getTotalPrice())}");
+  receipt.writeln();
+  receipt.writeln("Delivery to: $deliveryAddress");
+  return receipt.toString();
+}
+
+// format double value into money
+String _formatPrice(double price) {
+  return price.toStringAsFixed(2);
+}
+
+// format list of addons into a string summary
+String _formatAddons(List<Addon> addons) {
+  return addons
+      .map((addon) => "${addon.name} (₵${_formatPrice(addon.price)})")
+      .join(", ");
+}
+
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
 
   // String get totalPrice {
   //   double addonsPrice =
   //       selectedAddons.fold(0, (sum, addon) => sum + addon.price);
   //   return (food.price + addonsPrice) * quantity;
   // }
+<<<<<<< HEAD
 }
+=======
+
+ 
+}
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7

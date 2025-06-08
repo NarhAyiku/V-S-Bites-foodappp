@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:foodappp/components/my_button.dart';
 import 'package:foodappp/components/my_cart_tile.dart';
 import 'package:foodappp/models/restaurants.dart';
+<<<<<<< HEAD
 import 'package:provider/provider.dart';
 
+=======
+import 'package:foodappp/pages/payment_page.dart'; // <-- Make sure this import exists
+import 'package:provider/provider.dart';
+// import 'package:paystack_manager/paystack_pay_manager.dart';
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -13,6 +19,7 @@ class CartPage extends StatelessWidget {
     return Consumer<Restaurants>(
       builder: (context, restaurants, child) {
         final userCart = restaurants.cart;
+<<<<<<< HEAD
         final double rawTotalCedi = restaurants.getTotalPrice();
         // Convert GH₵ to pesewas (smallest unit). .round() to avoid fractions.
         final int amountPesewas = (rawTotalCedi * 100).round();
@@ -22,6 +29,14 @@ class CartPage extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: const Color.fromARGB(255, 255, 255, 255),
             title: const Text("Cart"),
+=======
+        final total = restaurants.getTotalPrice;
+
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text("Cart"),
+            backgroundColor: Colors.transparent,
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
             foregroundColor: Theme.of(context).colorScheme.inversePrimary,
             actions: [
               IconButton(
@@ -30,8 +45,12 @@ class CartPage extends StatelessWidget {
                     context: context,
                     builder: (context) => AlertDialog(
                       title: const Text("Clear Cart"),
+<<<<<<< HEAD
                       content: const Text(
                           "Are you sure you want to clear the cart?"),
+=======
+                      content: const Text("Are you sure you want to clear the cart?"),
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
@@ -48,7 +67,11 @@ class CartPage extends StatelessWidget {
                     ),
                   );
                 },
+<<<<<<< HEAD
                 icon: const Icon(Icons.delete_forever_outlined),
+=======
+                icon: const Icon(Icons.delete_forever_outlined ),
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
               ),
             ],
           ),
@@ -73,6 +96,7 @@ class CartPage extends StatelessWidget {
               ),
               // Checkout Button
               Padding(
+<<<<<<< HEAD
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15),
                 child: MyButton(
@@ -84,6 +108,20 @@ class CartPage extends StatelessWidget {
                   onTop: () {
                     // _startPayment(context, amountPesewas);
                   },
+=======
+                padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15),
+                child: MyButton(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PaymentPage(),
+                    ),
+                  ),
+                  // onTap: _checkPayment,
+                  text: "Proceed to Checkout (\₵${total().toStringAsFixed(2)})", 
+                  // text: "Proceed to Checkout (${userCart.length} items) - \$${getTotalPrice().toStringAsFixed(2)}", 
+                  onTop: () {  },
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
                 ),
               ),
             ],
@@ -91,6 +129,7 @@ class CartPage extends StatelessWidget {
         );
       },
     );
+<<<<<<< HEAD
 //   }
 
 //   /// Initializes Paystack with the given [amountPesewas].
@@ -161,3 +200,61 @@ class CartPage extends StatelessWidget {
 //   }
 }
 }
+=======
+  }
+}
+
+
+
+  // void _checkPayment() {
+  //   try {
+  //     PaystackPayManager(context: context)
+  //       ..setSecretKey("sk_test_fbf06d137e8515c1c7645196c6ae62bbe8008d91")
+  //       // ..setCompanyAssetImage(Image(image: NetworkImage("YOUR-IMAGE-URL")))
+  //       ..setAmount(10000)
+  //       ..setReference(DateTime.now().millisecondsSinceEpoch.toString())
+  //       ..setCurrency("GH")
+  //       ..setEmail("samuelbeebest@gmail.com")
+  //       ..setFirstName("Samuel")
+  //       ..setLastName("Adekunle")
+  //       ..setMetadata(
+  //         {
+  //           "custom_fields": [
+  //             {
+  //               "value": "TechWithSam",
+  //               "display_name": "Payment_to",
+  //               "variable_name": "Payment_to"
+  //             }
+  //           ]
+  //         },
+  //       )
+  //       ..onSuccesful(_onPaymentSuccessful)
+  //       ..onPending(_onPaymentPending)
+  //       ..onFailed(_onPaymentFailed)
+  //       ..onCancel(_onCancel)
+  //       ..initialize();
+  //   } catch (error) {
+  //     print('Payment Error ==> $error');
+  //   }
+  // }
+
+  // void _onPaymentSuccessful(Transaction transaction) {
+  //   print('Transaction succesful');
+  //   print(
+  //       "Transaction message ==> ${transaction.message}, Ref ${transaction.refrenceNumber}");
+  // }
+
+  // void _onPaymentPending(Transaction transaction) {
+  //   print('Transaction Pending');
+  //   print("Transaction Ref ${transaction.refrenceNumber}");
+  // }
+
+  // void _onPaymentFailed(Transaction transaction) {
+  //   print('Transaction Failed');
+  //   print("Transaction message ==> ${transaction.message}");
+  // }
+
+  // void _onCancel(Transaction transaction) {
+  //   print('Transaction Cancelled');
+  // }
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7

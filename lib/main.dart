@@ -6,6 +6,7 @@ import 'package:foodappp/models/restaurants.dart';
 import 'package:foodappp/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+<<<<<<< HEAD
 import 'package:flutter_stripe/flutter_stripe.dart';
 
 void main() async {
@@ -17,6 +18,13 @@ void main() async {
       'pk_test_51R1JA7B6fpUUbIm7pj0aLTgNElADS9TNbsSKea5aN2IMnQz7XOzaXxpEdKxqLZRhwfP5yerVJ3t3L7WKZle06iU9002ZX7bvxF'; // Replace with your real key
   await Stripe.instance.applySettings();
 
+=======
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
   runApp(
     MultiProvider(
       providers: [
@@ -35,7 +43,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+<<<<<<< HEAD
       home: const AuthGate(),
+=======
+       home: const AuthGate(),
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
       theme: Provider.of<ThemeProvider>(context).themeData,
     );
   }
@@ -66,4 +78,8 @@ class PriceWidget extends StatelessWidget {
       ),
     );
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7

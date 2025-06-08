@@ -4,6 +4,13 @@ import 'package:provider/provider.dart';
 
 class MyReceipt extends StatefulWidget {
   const MyReceipt({super.key});
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
   @override
   State<MyReceipt> createState() => _MyReceiptState();
 }
