@@ -1,0 +1,44 @@
+
+name: foodappp
+description: "A new Flutter project."
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: 3.6.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  # intl: ^0.20.2
+  collection: ^1.19.0
+  flutter_stripe: ^9.5.0
+  http: ^1.1.0
+  gap: ^3.0.1
+  url_launcher: ^6.2.5
+  shared_preferences: ^2.2.0
+  provider: ^6.0.0
+  # flutter_paystack: ^1.0.5+1
+  flutter_credit_card: ^4.1.0
+  firebase_core: ^3.13.0
+  firebase_auth: ^5.5.2
+  like_button: ^2.0.5
+  cloud_firestore: ^5.6.6
+  intl: ^0.17.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/Continental/
+    - assets/images/Local/
+    - assets/images/Drinks/
+    - assets/images/Salads/
+    - assets/images/Sides/
+    - assets/images/logo/
