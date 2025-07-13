@@ -7,11 +7,7 @@ class MyButton extends StatelessWidget {
   const MyButton({
     super.key,
     required this.onTap,
-<<<<<<< HEAD
     required this.text,
-=======
-    required this.text, 
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
     required Null Function() onTop,
   });
 
@@ -20,17 +16,10 @@ class MyButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-<<<<<<< HEAD
         padding: const EdgeInsets.all(20),
         margin: const EdgeInsets.symmetric(horizontal: 25),
         decoration: BoxDecoration(
           color: Colors.orange,
-=======
-        padding: const EdgeInsets.all(25),
-        margin: const EdgeInsets.symmetric(horizontal: 25),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondary,
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
           borderRadius: BorderRadius.circular(8),
         ),
         child: Center(
@@ -38,11 +27,7 @@ class MyButton extends StatelessWidget {
             text,
             style: TextStyle(
               fontWeight: FontWeight.bold,
-<<<<<<< HEAD
               color: Colors.white,
-=======
-              color: Theme.of(context).colorScheme.inversePrimary,
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
               fontSize: 16,
             ),
           ),
@@ -50,8 +35,4 @@ class MyButton extends StatelessWidget {
       ),
     );
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7

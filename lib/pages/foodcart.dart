@@ -139,13 +139,13 @@ class _FoodCardState extends State<FoodCard> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
-            Icons.add_shopping_cart,
+            Icons.remove_red_eye,
             color: Colors.white,
             size: 20,
           ),
           SizedBox(width: 8),
           Text(
-            'Add to Cart',
+            'View Item',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,

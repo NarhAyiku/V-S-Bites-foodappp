@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:foodappp/components/PromoCard.dart';
 import 'package:foodappp/components/my_food_tile.dart';
 import 'package:foodappp/components/my_sliver_app_bar.dart';
 import 'package:foodappp/models/food.dart';
 import 'package:foodappp/models/restaurants.dart';
+import 'package:foodappp/pages/ContinentalSection.dart';
 import 'package:foodappp/pages/cart_page.dart';
 import 'package:foodappp/pages/food_page.dart';
 import 'package:foodappp/pages/foodcart.dart';
@@ -12,19 +12,6 @@ import 'package:provider/provider.dart';
 
 import 'FoodSearchBar.dart';
 
-=======
-import 'package:foodappp/components/my_current_location.dart';
-import 'package:foodappp/components/my_description_box.dart';
-import 'package:foodappp/components/my_drawer.dart';
-import 'package:foodappp/components/my_food_tile.dart';
-import 'package:foodappp/components/my_sliver_app_bar.dart';
-import 'package:foodappp/components/my_tab_bar.dart';
-import 'package:foodappp/models/food.dart';
-import 'package:foodappp/models/restaurants.dart';
-import 'package:foodappp/pages/food_page.dart';
-import 'package:provider/provider.dart';
-
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -36,11 +23,8 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   // Tab controller
   late TabController _tabController;
-<<<<<<< HEAD
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
-=======
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
 
   @override
   void initState() {
@@ -49,7 +33,6 @@ class _HomePageState extends State<HomePage>
         TabController(length: FoodCategory.values.length, vsync: this);
   }
 
-<<<<<<< HEAD
   List<Food> _filterFoodItems(List<Food> foods, String query) {
     if (query.isEmpty) return foods;
 
@@ -60,56 +43,15 @@ class _HomePageState extends State<HomePage>
     }).toList();
   }
 
-=======
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
   @override
   void dispose() {
     _tabController.dispose();
     super.dispose();
-<<<<<<< HEAD
     _searchController.dispose();
-=======
-  }
-
-  // Sort out and return a list of food items that belong to a specific category
-  List<Food> _filterMenuByCategory(FoodCategory category, List<Food> fullMenu) {
-    return fullMenu.where((food) => food.category == category).toList();
-  }
-
-  // return list of food items in a given category
-  List<Widget> getFoodInThisCategory(List<Food> fullMenu) {
-    return FoodCategory.values.map((category) {
-
-      // get category menu
-      List<Food> categoryMenu = _filterMenuByCategory(category, fullMenu);
-
-      return ListView.builder(
-        itemCount: categoryMenu.length,
-        padding: EdgeInsets.zero,
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) {
-          // get individual food
-          final food = categoryMenu [index];
-
-          // return food tile UI
-          return FoodTile(food: food,
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => FoodPage(food: food),
-              ),
-            ),
-            // imagePath: 'assets/images/cheese_burger.png',
-          );
-        },
-      );
-    }).toList();
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
   }
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     return Consumer<Restaurants>(
       builder: (context, restaurants, child) {
         final userCart = restaurants.cart;
@@ -117,26 +59,27 @@ class _HomePageState extends State<HomePage>
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             elevation: 0,
             backgroundColor: Theme.of(context).colorScheme.background,
             foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-            leading: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      backgroundImage: AssetImage(
-                        'assets/images/Continental/vlogo.png',
-                      ),
-                      radius: 18,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // leading: Padding(
+            //   padding: const EdgeInsets.all(10.0),
+            //   child: Column(
+            //     children: [
+            //       Container(
+            //         padding: const EdgeInsets.only(left: 10),
+            //         child: CircleAvatar(
+            //           backgroundColor: Colors.transparent,
+            //           backgroundImage: AssetImage(
+            //             'assets/images/Continental/vlogo.png',
+            //           ),
+            //           radius: 18,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             actions: [
               Stack(
                 children: [
@@ -182,139 +125,82 @@ class _HomePageState extends State<HomePage>
             ],
           ),
           // drawer: MyDrawer(),
-          // body: NestedScrollView(
-          //   headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          //     MySliverAppBar(
-          //       title: MyTabBar(tabController: _tabController),
-          //       child: Column(
-          //         mainAxisAlignment: MainAxisAlignment.end,
-          //         children: [
-          //           // Divider(
-          //           //   indent: 25,
-          //           //   endIndent: 25,
-          //           //   color: Theme.of(context).colorScheme.secondary,
-          //           // ),
-          //           // My current location
-          //           Padding(
-          //             padding: const EdgeInsets.all(30.0),
-          //             child: PromoCard(),
-          //           ),
-          //           // const MyCurrentLocation(),
-          //           // Description box
+         body: Consumer<Restaurants>(
+  builder: (context, restaurants, child) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+     
+          const Padding(
+            padding: EdgeInsets.only(left:20.0, right: 20),
+            child: PromoCard(),
+          ),
+               SizedBox(height: 20),
+          // SpecialOffers(),
 
-          //           // Delivery bracket
-          //           // const MyDescriptionBox(),
-          //         ],
-          //       ),
-          //     ),
-          // ],
+          // ContinentalSection(
+          //   fullMenu: restaurants.menu,
+          // ),
+          SpecialOffers(),
+          for (var category in FoodCategory.values) ...[
+            const SizedBox(height: 24),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Text(
+                category.name,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+            ),
+            
+            const SizedBox(height: 8),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemCount:
+                  _filterMenuByCategory(category, restaurants.menu).length,
+              itemBuilder: (context, index) {
+                final food = _filterMenuByCategory(
+                    category, restaurants.menu)[index];
 
-          body: Consumer<Restaurants>(
-            builder: (context, restaurants, child) {
-              return ListView(
-                children: [
-                  for (var category in FoodCategory.values) ...[
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: PromoCard(),
-                        ),
-                        FoodSearchBar(
-                          searchController: _searchController,
-                          onSearch: (query) {
-                            setState(() {
-                              _searchQuery = query;
-                            });
-                          },
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 30, right: 30),
-                          child: Row(
-                            children: [
-                              Text(
-                                category.toString().split('.').last,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineSmall
-                                    ?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              Spacer(),
-                              // Text(
-                              //   'see more',
-                              //   style: Theme.of(context)
-                              //       .textTheme
-                              //       .headlineSmall
-                              //       ?.copyWith(
-                              //         fontSize: 12,
-                              //         color: const Color.fromARGB(
-                              //             255, 214, 100, 38),
-                              //         fontWeight: FontWeight.bold,
-                              //       ),
-                              // ),
-                              SizedBox(width: 4),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                size: 13,
-                                color: const Color.fromARGB(255, 214, 100, 38),
-                              ),
-                            ],
+                return TweenAnimationBuilder(
+                  tween: Tween(begin: 0.0, end: 1.0),
+                  duration: Duration(milliseconds: 400 + (index * 100)),
+                  builder: (context, value, child) {
+                    return Transform.translate(
+                      offset: Offset(0, 20 * (1 - value)),
+                      child: Opacity(
+                        opacity: value,
+                        child: FoodCard(
+                          food: food,
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FoodPage(food: food),
+                            ),
                           ),
                         ),
-                        ListView.builder(
-                          shrinkWrap: true, // Add this
-                          physics:
-                              const NeverScrollableScrollPhysics(), // Add this
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          itemCount:
-                              _filterMenuByCategory(category, restaurants.menu)
-                                  .length,
-                          itemBuilder: (context, index) {
-                            final food = _filterMenuByCategory(
-                                category, restaurants.menu)[index];
-                            return TweenAnimationBuilder(
-                              tween: Tween(begin: 0.0, end: 1.0),
-                              duration:
-                                  Duration(milliseconds: 400 + (index * 100)),
-                              builder: (context, value, child) {
-                                return Transform.translate(
-                                  offset: Offset(0, 20 * (1 - value)),
-                                  child: Opacity(
-                                    opacity: value,
-                                    child: FoodCard(
-                                      food: food,
-                                      onTap: () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              FoodPage(food: food),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ],
-              );
-            },
-          ),
-          // body: Consumer<Restaurants>(
-          //   builder: (context, restaurants, child) => TabBarView(
-          //     controller: _tabController,
-          //     children: getFoodInThisCategory(restaurants.menu),
-          //   ),
-          // ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ],
+
+          
+        ],
+      ),
+    );
+  },
+),
+
+       
         );
       },
     );
@@ -325,36 +211,6 @@ class _HomePageState extends State<HomePage>
 List<Food> _filterMenuByCategory(FoodCategory category, List<Food> fullMenu) {
   return fullMenu.where((food) => food.category == category).toList();
 }
-
-// // return list of food items in a given category
-// List<Widget> getFoodInThisCategory(List<Food> fullMenu) {
-//   return FoodCategory.values.map((category) {
-//     // get category menu
-//     List<Food> categoryMenu = _filterMenuByCategory(category, fullMenu);
-
-//     return ListView.builder(
-//       itemCount: categoryMenu.length,
-//       padding: EdgeInsets.zero,
-//       physics: const NeverScrollableScrollPhysics(),
-//       itemBuilder: (context, index) {
-//         // get individual food
-//         final food = categoryMenu[index];
-
-//         // return food tile UI
-//         return FoodTile(
-//           food: food,
-//           onTap: () => Navigator.push(
-//             context,
-//             MaterialPageRoute(
-//               builder: (context) => FoodPage(food: food),
-//             ),
-//           ),
-//           // imagePath: 'assets/images/cheese_burger.png',
-//         );
-//       },
-//     );
-//   }).toList();
-// }
 
 List<Widget> getFoodInThisCategory(List<Food> fullMenu) {
   return FoodCategory.values.map((category) {
@@ -421,37 +277,157 @@ List<Widget> getFoodInThisCategory(List<Food> fullMenu) {
     );
   }).toList();
 }
-=======
-    return Scaffold(
-      drawer: MyDrawer(),
-      body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          MySliverAppBar(
-            title: MyTabBar(tabController: _tabController),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+
+
+
+
+
+class SpecialOfferCard extends StatelessWidget {
+  const SpecialOfferCard({
+    Key? key,
+    required this.category,
+    required this.image,
+    required this.numOfBrands,
+    required this.press,
+  }) : super(key: key);
+
+  final String category, image;
+  final int numOfBrands;
+  final GestureTapCallback press;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20),
+      child: GestureDetector(
+        onTap: press,
+        child: SizedBox(
+          width: 342,
+          height: 150,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Stack(
               children: [
-                Divider(
-                  indent: 25,
-                  endIndent: 25,
-                  color: Theme.of(context).colorScheme.secondary,
+                Image.asset(
+                  image,
+                  fit: BoxFit.cover,
+                  height: 150,
                 ),
-                // My current location
-                const MyCurrentLocation(),
-                // Description box
-                const MyDescriptionBox(),
+                Container(
+                  decoration: const BoxDecoration(
+                    // gradient: LinearGradient(
+                    //   begin: Alignment.topCenter,
+                    //   end: Alignment.bottomCenter,
+                    //   colors: [
+                    //     Colors.black54,
+                    //     Colors.black38,
+                    //     Colors.black38,
+                    //     Colors.black38,
+                    //   ],
+                    // ),
+                  ),
+                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(
+                //     horizontal: 15,
+                //     vertical: 10,
+                //   ),
+                //   child: Text.rich(
+                //     TextSpan(
+                //       style: const TextStyle(color: Colors.white),
+                //       children: [
+                //         TextSpan(
+                //           text: "$category\n",
+                //           style: const TextStyle(
+                //             fontSize: 18,
+                //             fontWeight: FontWeight.bold,
+                //           ),
+                //         ),
+                //         TextSpan(text: "$numOfBrands Brands")
+                //       ],
+                //     ),
+                //   ),
+                // ),
               ],
             ),
-          ),
-        ],
-        body: Consumer<Restaurants>(
-          builder: (context, restaurants, child) => TabBarView(
-            controller: _tabController,
-            children: getFoodInThisCategory(restaurants.menu),
           ),
         ),
       ),
     );
   }
 }
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
+
+class SectionTitle extends StatelessWidget {
+  const SectionTitle({
+    Key? key,
+    required this.title,
+    required this.press,
+  }) : super(key: key);
+
+  final String title;
+  final GestureTapCallback press;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+        ),
+        // TextButton(
+        //   onPressed: press,
+        //   style: TextButton.styleFrom(foregroundColor: Colors.grey),
+        //   child: const Text("See more"),
+        // ),
+      ],
+    );
+  }
+}
+
+
+
+class SpecialOffers extends StatelessWidget {
+  const SpecialOffers({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 20),
+        //   child: SectionTitle(
+        //     title: "Special for you",
+        //     press: () {},
+        //   ),
+        // ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              SpecialOfferCard(
+                image: "assets/images/Local/2025-07-13 18.24.37.jpg",
+                category: "Fashion",
+                numOfBrands: 24,
+                press: () {},
+              ),
+              SpecialOfferCard(
+                image: "assets/images/Local/2025-07-13 20.13.56.png",
+                category: "Smartphone",
+                numOfBrands: 18,
+                press: () {},
+              ),
+              
+              const SizedBox(width: 20),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}

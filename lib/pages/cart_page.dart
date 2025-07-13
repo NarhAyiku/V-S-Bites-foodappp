@@ -1,15 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:foodappp/components/my_button.dart';
 import 'package:foodappp/components/my_cart_tile.dart';
 import 'package:foodappp/models/restaurants.dart';
-<<<<<<< HEAD
+import 'package:foodappp/pages/StripeService.dart';
+import 'package:foodappp/pages/Successfulpage.dart';
+import 'package:foodappp/pages/payment_page.dart';
+import 'package:foodappp/pages/sendPaymentToBackend.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-=======
-import 'package:foodappp/pages/payment_page.dart'; // <-- Make sure this import exists
-import 'package:provider/provider.dart';
-// import 'package:paystack_manager/paystack_pay_manager.dart';
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -19,7 +20,8 @@ class CartPage extends StatelessWidget {
     return Consumer<Restaurants>(
       builder: (context, restaurants, child) {
         final userCart = restaurants.cart;
-<<<<<<< HEAD
+        //  final userCart = restaurants.cart;
+        final total = restaurants.getTotalPrice;
         final double rawTotalCedi = restaurants.getTotalPrice();
         // Convert GH₵ to pesewas (smallest unit). .round() to avoid fractions.
         final int amountPesewas = (rawTotalCedi * 100).round();
@@ -28,15 +30,12 @@ class CartPage extends StatelessWidget {
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           appBar: AppBar(
             backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-            title: const Text("Cart"),
-=======
-        final total = restaurants.getTotalPrice;
-
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text("Cart"),
-            backgroundColor: Colors.transparent,
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
+            title: const Text("Cart",
+            style: TextStyle(
+          fontSize: 30,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF010F07),
+        ),),
             foregroundColor: Theme.of(context).colorScheme.inversePrimary,
             actions: [
               IconButton(
@@ -45,12 +44,8 @@ class CartPage extends StatelessWidget {
                     context: context,
                     builder: (context) => AlertDialog(
                       title: const Text("Clear Cart"),
-<<<<<<< HEAD
                       content: const Text(
                           "Are you sure you want to clear the cart?"),
-=======
-                      content: const Text("Are you sure you want to clear the cart?"),
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
@@ -67,11 +62,7 @@ class CartPage extends StatelessWidget {
                     ),
                   );
                 },
-<<<<<<< HEAD
                 icon: const Icon(Icons.delete_forever_outlined),
-=======
-                icon: const Icon(Icons.delete_forever_outlined ),
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
               ),
             ],
           ),
@@ -86,50 +77,238 @@ class CartPage extends StatelessWidget {
                           style: TextStyle(fontSize: 16),
                         ),
                       )
-                    : ListView.builder(
-                        itemCount: userCart.length,
-                        itemBuilder: (context, index) {
-                          final cartItem = userCart[index];
-                          return MyCartTile(cartItem: cartItem);
-                        },
-                      ),
-              ),
-              // Checkout Button
-              Padding(
-<<<<<<< HEAD
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15),
-                child: MyButton(
-                  text:
-                      "Proceed to Checkout (₵${rawTotalCedi.toStringAsFixed(2)})",
-                  onTap: () {
-                    // Kick off Paystack with dynamic amount
-                  },
-                  onTop: () {
-                    // _startPayment(context, amountPesewas);
-                  },
-=======
-                padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15),
-                child: MyButton(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PaymentPage(),
+                    : SingleChildScrollView(
+                    padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                      children: [
+                          Card(
+                            color: const Color.fromARGB(255, 241, 241, 241),
+                            margin: const EdgeInsets.all(16.0),
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        "Subtotal",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      Text(
+                                        "₵${total().toStringAsFixed(2)}",
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: const [
+                                      Text(
+                                        "Service Fee",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      Text(
+                                        "₵5.00",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    ],
+                                  ),
+                                  const Divider(height: 24, thickness: 1),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        "Total",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        "₵${(total() + 5).toStringAsFixed(2)}",
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color.fromARGB(255, 0, 0, 0),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                        ),
+                        const SizedBox(height: 16),
+                         ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(), // Disable internal scroll
+                          itemCount: userCart.length,
+                          itemBuilder: (context, index) {
+                            final cartItem = userCart[index];
+                            return MyCartTile(cartItem: cartItem);
+                          },
+                        ),
+                  
+                      ],
                     ),
-                  ),
-                  // onTap: _checkPayment,
-                  text: "Proceed to Checkout (\₵${total().toStringAsFixed(2)})", 
-                  // text: "Proceed to Checkout (${userCart.length} items) - \$${getTotalPrice().toStringAsFixed(2)}", 
-                  onTop: () {  },
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
                 ),
               ),
+              // Checkout Button
+               if (userCart.isNotEmpty)
+                Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                StatefulBuilder(
+                builder: (context, setState) {
+                  // Use a ValueNotifier for stateful selection
+                  final paymentNotifier = ValueNotifier<int>(0);
+                  return ValueListenableBuilder<int>(
+                  valueListenable: paymentNotifier,
+                  builder: (context, selectedPayment, _) => Row(
+                    children: [
+                    Radio<int>(
+                          value: 0,
+                          groupValue: selectedPayment,
+                          onChanged: (value) {
+                            paymentNotifier.value = value!;
+                          },
+                          activeColor: Colors.orange, // orange when selected
+                          fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                            if (states.contains(MaterialState.selected)) {
+                              return Colors.orange; // Fill with orange when selected
+                            }
+                            return Colors.grey; // Or whatever you want when unselected
+                          }),
+                        ),
+
+                    const Text('Cash'),
+                    Radio<int>(
+                      value: 1,
+                      groupValue: selectedPayment,
+                      onChanged: (value) {
+                        paymentNotifier.value = value!;
+                      },
+                      activeColor: Colors.orange, // orange when selected
+                      fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+                        if (states.contains(MaterialState.selected)) {
+                          return Colors.orange; // Fill with orange when selected
+                        }
+                        return Colors.grey; // Or whatever you want when unselected
+                      }),
+                    ),
+
+                    const Text('Card'),
+                   
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
+                      child: MyButton(
+                        onTap: () async {
+                         
+                            // Retrieve phone number from SharedPreferences
+                            final prefs = await SharedPreferences.getInstance();
+                            String phoneNumber = prefs.getString('phoneNumber') ?? '';
+                            double totalAmount = total() + 5;
+                            
+                            String paymentMethod = selectedPayment == 0 ? "cash" : "card";
+
+                            final userCart = restaurants.cart;
+                            // Gather cart details: product names, images, and addons
+                            List<Map<String, dynamic>> cartDetailsList = userCart.map((cartItem) {
+                              return {
+                                'name': cartItem.food.name,
+                                // 'image': cartItem.food.imagePath,
+                                // 'addons': cartItem.selectedAddons ?? [],
+                              };
+                            }).toList();
+
+                            try {
+                              await sendPaymentToBackend(
+                                amount: totalAmount,
+                                paymentMethod: paymentMethod,
+                                phoneNumber: phoneNumber,
+                                cartDetails: jsonEncode(cartDetailsList),
+                              );
+
+                              if (selectedPayment == 0) {
+                                // Cash
+                                restaurants.clearCart();
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                  builder: (context) => SuccessfulPage(
+                                    totalAmount: totalAmount,
+                                  ),
+                                  ),
+                                );
+                                print("Payment error:");
+                            } else {
+                              // Card
+                              final stripeService = StripeService();
+                              await stripeService.makeTestPayment(amount: totalAmount);
+
+                              restaurants.clearCart();
+// 
+
+                              // Navigator.pushReplacement(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => const PaymentPage(),
+                              //   ),
+                              // );
+                            }
+                               print("Payment error: ");
+                          } catch (e) {
+                            // Handle error: show a dialog, snack bar, etc.
+                            print("Payment error: $e");
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("Payment failed, please try again.")),
+                            );
+                          }
+                        },
+                        text: "Pay  ₵${(total() + 5).toStringAsFixed(2)}",
+                        onTop: () {},
+                      ),
+                    ),
+
+                    ],
+                  ),
+                  );
+                },
+                ),
+              ],
+              ),
+               SizedBox(height: 40),
+
+              // Padding(
+              //   padding:
+              //       const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15),
+              //   child: MyButton(
+              //     text:
+              //         "Proceed to Checkout (₵${rawTotalCedi.toStringAsFixed(2)})",
+              //     onTap: () {
+              //       Navigator.pushReplacement(
+              //             context,
+              //             MaterialPageRoute(
+              //             builder: (context) => const SuccessfulPage(),
+              //             ),
+              //           );
+              //       // Kick off Paystack with dynamic amount
+              //     },
+              //     onTop: () {
+              //       // _startPayment(context, amountPesewas);
+              //     },
+              //   ),
+              // ),
             ],
           ),
         );
       },
     );
-<<<<<<< HEAD
 //   }
 
 //   /// Initializes Paystack with the given [amountPesewas].
@@ -200,61 +379,3 @@ class CartPage extends StatelessWidget {
 //   }
 }
 }
-=======
-  }
-}
-
-
-
-  // void _checkPayment() {
-  //   try {
-  //     PaystackPayManager(context: context)
-  //       ..setSecretKey("sk_test_fbf06d137e8515c1c7645196c6ae62bbe8008d91")
-  //       // ..setCompanyAssetImage(Image(image: NetworkImage("YOUR-IMAGE-URL")))
-  //       ..setAmount(10000)
-  //       ..setReference(DateTime.now().millisecondsSinceEpoch.toString())
-  //       ..setCurrency("GH")
-  //       ..setEmail("samuelbeebest@gmail.com")
-  //       ..setFirstName("Samuel")
-  //       ..setLastName("Adekunle")
-  //       ..setMetadata(
-  //         {
-  //           "custom_fields": [
-  //             {
-  //               "value": "TechWithSam",
-  //               "display_name": "Payment_to",
-  //               "variable_name": "Payment_to"
-  //             }
-  //           ]
-  //         },
-  //       )
-  //       ..onSuccesful(_onPaymentSuccessful)
-  //       ..onPending(_onPaymentPending)
-  //       ..onFailed(_onPaymentFailed)
-  //       ..onCancel(_onCancel)
-  //       ..initialize();
-  //   } catch (error) {
-  //     print('Payment Error ==> $error');
-  //   }
-  // }
-
-  // void _onPaymentSuccessful(Transaction transaction) {
-  //   print('Transaction succesful');
-  //   print(
-  //       "Transaction message ==> ${transaction.message}, Ref ${transaction.refrenceNumber}");
-  // }
-
-  // void _onPaymentPending(Transaction transaction) {
-  //   print('Transaction Pending');
-  //   print("Transaction Ref ${transaction.refrenceNumber}");
-  // }
-
-  // void _onPaymentFailed(Transaction transaction) {
-  //   print('Transaction Failed');
-  //   print("Transaction message ==> ${transaction.message}");
-  // }
-
-  // void _onCancel(Transaction transaction) {
-  //   print('Transaction Cancelled');
-  // }
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7

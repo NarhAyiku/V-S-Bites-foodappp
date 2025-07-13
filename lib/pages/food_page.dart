@@ -38,7 +38,6 @@ class _FoodPageState extends State<FoodPage> {
 
     context.read<Restaurants>().addToCart(widget.food, currentlySelectedAddons);
   }
-<<<<<<< HEAD
 
   @override
   Widget build(BuildContext context) {
@@ -105,45 +104,59 @@ class _FoodPageState extends State<FoodPage> {
                   ),
                   const SizedBox(height: 10),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         widget.food.name,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 25,
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: Colors.orange,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(
-                          'surprise',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                      Spacer(),
+                      Icon(Icons.star, color: Colors.amber),
+                      const SizedBox(width: 5),
+                       Text(
+                          '3.9 (Ratings)',
+                          style: TextStyle(
+                            color: const Color.fromARGB(255, 0, 0, 0),
                             fontSize: 15,
                           ),
                         ),
-                      ),
+                        
                     ],
                   ),
-                  const SizedBox(height: 20),
-                  Divider(
-                    color: Theme.of(context).colorScheme.secondary,
-                    thickness: 1,
+                  SizedBox(height: 2),
+                  Row(
+                    children: [
+                        // Spacer(),
+                       Text(
+                        'Price: ₵${widget.food.price}',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Spacer(),
+                         Text(
+                        '₵200',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                        ),
+                    
+                    ],
                   ),
-                  // Text(
-                  //   '₵${widget.food.price}',
-                  //   style: TextStyle(
-                  //     fontSize: 16,
-                  //     color: Theme.of(context).colorScheme.primary,
-                  //   ),
-                  // ),
-                  // const SizedBox(height: 10),
+                  const SizedBox(height: 10),
+                   Divider(color: Theme.of(context).colorScheme.secondary),
+                  Text('Description',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      )),
                   Text(widget.food.description),
                   const SizedBox(height: 10),
                   Divider(color: Theme.of(context).colorScheme.secondary),
@@ -181,13 +194,19 @@ class _FoodPageState extends State<FoodPage> {
                                   color: Theme.of(context).colorScheme.primary,
                                 ),
                               ),
-                              value: selectedAddons[addon],
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  selectedAddons[addon] = value!;
-                                });
-                              },
-                            );
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 12, ),
+                                  controlAffinity: ListTileControlAffinity.leading, // checkbox on the left
+                               checkboxShape: const CircleBorder(),
+                            value: selectedAddons[addon],
+                            onChanged: (bool? value) {
+                              setState(() {
+                                selectedAddons[addon] = value!;
+                              });
+                            },
+                            shape: const CircleBorder(),
+                            activeColor: Colors.orange, // red when selected
+                            checkColor: Colors.white, // tick color
+                          );
                           },
                         ),
                       ),
@@ -244,109 +263,10 @@ class _FoodPageState extends State<FoodPage> {
               SizedBox(
                 width: 250,
                 child: MyButton(
-=======
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    body: SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(widget.food.imagePath),
-                    ),
-                    Positioned(
-                      top: 10,
-                      right: 10,
-                      child: CustomLikeButton(),
-                    ),
-                     Positioned(
-                      top: 10,
-                      left: 10,
-                      child: IconButton(
-                        icon: const Icon(Icons.arrow_back_ios_rounded),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  widget.food.name,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                Text(
-                  '₵${widget.food.price}',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Text(widget.food.description),
-                const SizedBox(height: 10),
-                Divider(color: Theme.of(context).colorScheme.secondary),
-                const SizedBox(height: 10),
-                Text(
-                  "Add-ons",
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.inversePrimary,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.zero,
-                    itemCount: widget.food.availableAddons.length,
-                    itemBuilder: (context, index) {
-                      Addon addon = widget.food.availableAddons[index];
-                      return CheckboxListTile(
-                        title: Text(addon.name),
-                        subtitle: Text(
-                          '₵${addon.price}',
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        ),
-                        value: selectedAddons[addon],
-                        onChanged: (bool? value) {
-                          setState(() {
-                            selectedAddons[addon] = value!;
-                          });
-                        },
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 20),
-                MyButton(
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
                   onTap: addToCart,
                   text: "Add to Cart",
                   onTop: () {},
                 ),
-<<<<<<< HEAD
               ),
             ],
           ),
@@ -354,18 +274,6 @@ Widget build(BuildContext context) {
       ),
     );
   }
-=======
-                const SizedBox(height: 25),
-              ],
-            ),
-          ),
-        ],
-      ),
-    ),
-    
-  );
-}
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
 }
 
 

@@ -15,7 +15,6 @@ migration:
     - platform: root
       create_revision: c519ee916eaeb88923e67befb89c0f1dabfa83e6
       base_revision: c519ee916eaeb88923e67befb89c0f1dabfa83e6
-<<<<<<< HEAD
     - platform: android
       create_revision: c519ee916eaeb88923e67befb89c0f1dabfa83e6
       base_revision: c519ee916eaeb88923e67befb89c0f1dabfa83e6
@@ -34,11 +33,6 @@ migration:
     - platform: windows
       create_revision: c519ee916eaeb88923e67befb89c0f1dabfa83e6
       base_revision: c519ee916eaeb88923e67befb89c0f1dabfa83e6
-=======
-    - platform: macos
-      create_revision: c519ee916eaeb88923e67befb89c0f1dabfa83e6
-      base_revision: c519ee916eaeb88923e67befb89c0f1dabfa83e6
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
 
   # User provided section
 

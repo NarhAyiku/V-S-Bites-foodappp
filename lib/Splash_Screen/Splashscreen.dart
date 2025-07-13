@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodappp/Navigation.dart/Bottomnavigation.dart';
 import 'package:foodappp/Splash_Screen/Onboarding.dart';
+import 'package:foodappp/components/PhoneForm.dart';
 import 'package:foodappp/pages/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,6 +21,11 @@ class _SplashScreenState extends State<SplashScreen> {
     checkFirstTime();
   }
 
+   Future<bool> _checkLoginStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('isLoggedIn') ?? false;
+  }
+
   Future<void> checkFirstTime() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isFirstTime = prefs.getBool(KEYLOGIN) ?? true;
@@ -27,12 +33,19 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 3));
 
     if (isFirstTime) {
-      // First time user
       await prefs.setBool(KEYLOGIN, false);
       if (mounted) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const OnboardingScreen()),
+        );
+      }
+    } else if (await _checkLoginStatus() == false) {
+      // User is not logged in
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => PhoneForm()),
         );
       }
     } else {
@@ -59,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Your logo here
-            Image.network(
+            Image.asset(
               'assets/images/Continental/logo.png',
               width: 150,
               height: 150,

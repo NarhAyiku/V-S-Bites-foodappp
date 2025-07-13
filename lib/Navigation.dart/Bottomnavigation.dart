@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:foodappp/components/fav.dart';
 import 'package:foodappp/components/my_cart_tile.dart';
+import 'package:foodappp/orderpage/user_order.dart';
 import 'package:foodappp/pages/cart_page.dart';
 import 'package:foodappp/pages/cartme.dart';
 import 'package:foodappp/pages/home_page.dart';
@@ -24,8 +26,13 @@ class _DashboardPageState extends State<DashboardPage> {
     {
       'icon': 'assets/images/Salads/memo-circle-check_9585392.png',
       'icon_active': 'assets/images/Salads/memo-circle-check_9585392.png',
-      'fragment': Cartme(),
+      'fragment': OrdersPage(phoneNumber: '',),
     },
+    // {
+    //   'icon': 'assets/images/Salads/memo-circle-check_9585392.png',
+    //   'icon_active': 'assets/images/Salads/memo-circle-check_9585392.png',
+    //   'fragment': FavoritesPage(),
+    // },
     {
       'icon': 'assets/images/Salads/settings_3917058.png',
       'icon_active': 'assets/images/Salads/settings_3917058.png',

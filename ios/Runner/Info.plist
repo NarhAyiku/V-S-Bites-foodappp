@@ -45,7 +45,6 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-<<<<<<< HEAD
 
 
 
@@ -54,6 +53,11 @@
 	<key>NSAllowsArbitraryLoads</key>
 	<true/>
 	</dict>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+	<string>stripe</string>
+	</array>
+
 	
 	<key>CFBundleURLTypes</key>
 	<array>
@@ -69,7 +73,5 @@
 	<string>Scan your card to add it automatically</string>
 	<key>NSCameraUsageDescription</key>
 	<string>To scan cards</string>
-=======
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
 </dict>
 </plist>

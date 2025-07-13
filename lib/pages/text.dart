@@ -1,106 +1,18 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:foodappp/orderpage/user_order.dart';
-import 'package:foodappp/pages/Phone_service.dart';
-import 'package:foodappp/themes/theme_provider.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:foodappp/orderpage/user_order.dart';
 
-// class SettingsPage extends StatelessWidget {
-//   const SettingsPage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text("Settings"),
-//         backgroundColor: Theme.of(context).colorScheme.background,
-//       ),
-//       backgroundColor: Theme.of(context).colorScheme.background,
-//       body: Column(
-//         children: [
-//           Container(
-//             decoration: BoxDecoration(
-//               color: Theme.of(context).colorScheme.secondary,
-//               borderRadius: BorderRadius.circular(12),
-//             ),
-//             margin: const EdgeInsets.only(left: 25, top: 10, right: 25),
-//             padding: const EdgeInsets.all(25),
-//             child: Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: [
-//                 // Dark Mode Text
-//                 Text(
-//                   "Dark Mode",
-//                   style: TextStyle(
-//                     fontWeight: FontWeight.bold,
-//                     color: Theme.of(context).colorScheme.inversePrimary,
-//                   ),
-//                 ),
-//                 // Switch
-//                 CupertinoSwitch(
-//                   value: Provider.of<ThemeProvider>(context).isDarkMode,
-//                   onChanged: (value) => Provider.of<ThemeProvider>(context, listen: false)
-//                       .toggleTheme(),
-//                 ),
-//               ],
-//             ),
-//           ),
-
-
-//           Container(
-//             decoration: BoxDecoration(
-//               color: Theme.of(context).colorScheme.secondary,
-//               borderRadius: BorderRadius.circular(12),
-//             ),
-//             margin: const EdgeInsets.only(left: 25, top: 10, right: 25),
-//             padding: const EdgeInsets.all(25),
-//             child: Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: [
-//                 // Dark Mode Text
-//                 Text(
-//                   "Logout",
-//                   style: TextStyle(
-//                     fontWeight: FontWeight.bold,
-//                     color: Theme.of(context).colorScheme.inversePrimary,
-//                   ),
-//                 ),
-//                 // Switch
-//                ElevatedButton(onPressed: (){
-//                 logout(context);
-//                }
-//                , child: Text('Logout'))
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-        title: const Text("Settings", style: TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
-          color: Color(0xFF010F07),
-        ),),
-        backgroundColor: Colors.white,
-      ),
-        backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -119,8 +31,14 @@ class SettingsPage extends StatelessWidget {
                   press: () {},
                 ),
                 ProfileMenuCard(
+                  svgSrc: lockIconSvg,
+                  title: "Change Password",
+                  subTitle: "Change your password",
+                  press: () {},
+                ),
+                ProfileMenuCard(
                   svgSrc: cardIconSvg,
-                  title: "Order History",
+                  title: "Payment Methods",
                   subTitle: "Add your credit & debit cards",
                   press: () {
                      Navigator.push(
@@ -131,14 +49,17 @@ class SettingsPage extends StatelessWidget {
                     ); 
                   },
                 ),
-               
+                ProfileMenuCard(
+                  svgSrc: fbIconSvg,
+                  title: "Add Social Account",
+                  subTitle: "Add Facebook, Twitter etc ",
+                  press: () {},
+                ),
                 ProfileMenuCard(
                   svgSrc: shareIconSvg,
-                  title: "Log Out",
-                  subTitle: "Log out of your account",
-                  press: () {
-                     logout(context);
-                  },
+                  title: "Refer to Friends",
+                  subTitle: "Get \$10 for reffering friends",
+                  press: () {},
                 ),
               ],
             ),
@@ -172,25 +93,15 @@ class ProfileMenuCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 5),
           child: Row(
             children: [
-                Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                  color: Colors.grey.shade300,
-                  width: 2,
-                  ),
-                ),
-                padding: const EdgeInsets.all(6),
-                child: SvgPicture.string(
-                  svgSrc!,
-                  height: 24,
-                  width: 24,
-                  colorFilter: ColorFilter.mode(
+              SvgPicture.string(
+                svgSrc!,
+                height: 24,
+                width: 24,
+                colorFilter: ColorFilter.mode(
                   const Color(0xFF010F07).withOpacity(0.64),
                   BlendMode.srcIn,
-                  ),
                 ),
-                ),
+              ),
               const SizedBox(width: 8),
               Expanded(
                 child: Column(
@@ -214,10 +125,10 @@ class ProfileMenuCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-                Icon(
-                  Icons.arrow_forward_ios_outlined,
-                  size: 20,
-                )
+              const Icon(
+                Icons.arrow_forward_ios_outlined,
+                size: 20,
+              )
             ],
           ),
         ),

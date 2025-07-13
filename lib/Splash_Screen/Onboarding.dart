@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodappp/Navigation.dart/Bottomnavigation.dart';
+import 'package:foodappp/components/PhoneForm.dart';
 import 'package:foodappp/pages/home_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -116,7 +117,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const DashboardPage()),
+                                               PhoneForm()),
                                     );
                                   } else {
                                     _pageController.nextPage(

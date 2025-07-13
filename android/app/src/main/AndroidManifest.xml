@@ -1,8 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-<<<<<<< HEAD
     <uses-permission android:name="android.permission.INTERNET"/>
-=======
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
     <application
         android:label="foodappp"
         android:name="${applicationName}"

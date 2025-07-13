@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:foodappp/models/restaurants.dart';
 import 'package:provider/provider.dart';
-=======
-import 'package:foodappp/pages/cart_page.dart';
-import 'package:foodappp/models/restaurants.dart';
-import 'package:provider/provider.dart'; 
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
 
 class MySliverAppBar extends StatefulWidget {
   final Widget child;
@@ -30,7 +24,6 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
         final userCart = restaurants.cart;
 
         return SliverAppBar(
-<<<<<<< HEAD
           expandedHeight: 280,
           collapsedHeight: 120,
           floating: false,
@@ -82,55 +75,6 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
           //   )
           // ],
           // title: const Text("V's Bites"),
-=======
-          expandedHeight: 340,
-          collapsedHeight: 120,
-          floating: false,
-          pinned: true,
-          actions: [
-            // cart button with badge
-            Stack(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    // go to cart page
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const CartPage(),
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.shopping_cart),
-                ),
-                if (userCart.isNotEmpty)
-                  Positioned(
-                    right: 0,
-                    child: Container(
-                      padding: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      constraints: const BoxConstraints(
-                        minWidth: 20,
-                        minHeight: 20,
-                      ),
-                      child: Text(
-                        '${userCart.length}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-              ],
-            )
-          ],
-          title: const Text("V's Bites"),
->>>>>>> 7d254673eea77aca16eeeb906fa5155b870e92e7
           backgroundColor: Theme.of(context).colorScheme.background,
           foregroundColor: Theme.of(context).colorScheme.inversePrimary,
           flexibleSpace: FlexibleSpaceBar(
